@@ -1,22 +1,18 @@
-h1 {
-    color: red;
+h1{
+    color: #ff0000;
+
 }
-
-/*property : value*/
-
+/*property: value*/
 #home-intro{
     text-align: center;
-    /*border: 3px; 
-    border-color: black;
-    border-style: solid;*/
+    border: 3px solid #4d84dc;
+    
+}
+#home-intro:hover{
+    background-color: #b0c6ea;
+}
 
-    border: 3px solid blue;
-    margin: 20px;
-    padding: 20px;
-    color: beige;
-    background-color: black;
-    text-align: center;
-    hover: {
-        color: red;
-    }
+
+#p2{
+    color: #2574f3;
 }
