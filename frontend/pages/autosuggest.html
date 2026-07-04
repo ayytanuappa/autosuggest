@@ -1,19 +1,100 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>BeingInfinity</title>
-</head>
-<body>
-    <span>⚙</span>
-    <span>● online</span>
-    <span> | </span>
-    <span>🕒</span>
-    <span> - ms</span>
-    <h1>BeingInfinity</h1>
+<html lang ="en">
+    <head>
+       
+        <title>Being Infinity</title>
+        <style>
+            .l{
+                position:fixed;
+                top:20px;
+                left:20px;
+            }
+            .r{
+                position:fixed;
+                top:20px;
+                right:20px;
+            }
+            .search{
+                text-align:center;
+                margin-top:100px;
+            }
+            .logo{
+                color:Blue;
+            }
+            .ge{
+                color:gray;
+            }
+            .lens{
+                position:relative;
+                left:40px;
+            }
+            .box{
+                padding:15px 15px 15px 45px;
+                border-radius:30px;
+                width:30%;
+            }
+            #sug{
+                /* border:1px solid black; */
+                width:30%;
+                margin-left:36%;
+            }
+        </style>
+    </head>
+     <body>
+          <div>
+            <span class="l">&#9881;</span>
+            <span class="r"> &#8226; online | &#9201; - ms</span>
+           </div>
+           <div class="search">
+        <h1><span class="logo">Being</span> Infinity</h1>
+       <span class="ge">
+        <p>One million phrases. Four Algorithms. Prefix based Auto Suggest.</p>
+     
+     <span class="lens">&#128269;</span>
+     <label>
+        <input class="box" id="box" type="text" placeholder="Start typing to search phrases...">
+     </label>
+     </span>
+     <div id="sug">
+        <!-- Suggestion box -->
+     </div>
+     </div>
+     <script>
+        var searchbox=document.querySelector("#box");
+        var suggestionBox=document.querySelector("#sug");
+        searchbox.addEventListener("input",function(){
+           //get user typed text
+            var userInput=searchbox.value;
+            if(userInput.trim()===""){
 
-    <p>One million phrases. Four algorithms. Prefix Based Auto Suggest.</p>
-    <span>🔍</span>
-    <input type="text" placeholder="Start typing to search phrases">
+            }
+            else
+            {
+                var url1= "https://autosuggest-backend.onrender.com/api/autosuggest?q="
+                var url2 = "&algorithm=brute&limit=10&weighted=false";
+                var url = url1 + userInput + url2;
+            }
+           // make api call to get suggestions
+           fetch(url)
+           .then(function(response){
+            return response .json();
+           })
+           .then(function(data){
+            console.log(data);
+            
+            var resultArray=data.results;
+            var res="";
+            for(var i=0;i<resultArray.length;i++){
+                res+="<div>"+resultArray[i].text+"</div>";
+            }
+            suggestionBox.innerHTML=res;
+           })
+         
 
-</body>
+           // display data in html
+          
+           
+        })
+     </script>
+     </body>
 </html>
