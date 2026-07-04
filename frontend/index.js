@@ -40,4 +40,5 @@ function getRandomUser(){
             document.getElementById("card-name").innerText = name;
             document.getElementById("card-gender").innerText = gender;
         });
+        consolel.log('')
 }
