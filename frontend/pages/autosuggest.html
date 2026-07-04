@@ -19,7 +19,7 @@
                 margin-top:100px;
             }
             .logo{
-                color:Blue;
+                color: blue;
             }
             .ge{
                 color:gray;
@@ -34,67 +34,81 @@
                 width:30%;
             }
             #sug{
-                /* border:1px solid black; */
-                width:30%;
-                margin-left:36%;
-            }
+    width:30%;
+    margin-left:36%;
+    margin-top:5px;
+    text-align:left;
+}
+
+#sug div{
+    border:1px solid #d3d3d3;
+    padding:10px 15px;
+    background-color:white;
+    cursor:pointer;
+    border-radius: 10px;
+}
+
+#sug div:hover{
+    background-color:#f2f2f2;
+
+}
         </style>
     </head>
      <body>
           <div>
             <span class="l">&#9881;</span>
-            <span class="r"> &#8226; online | &#9201; - ms</span>
+            <span class="r">&#8226; online | &#9201; - ms</span>
            </div>
            <div class="search">
-        <h1><span class="logo">Being</span> Infinity</h1>
+        <h1  style="font-size:60px;"><span class="logo">Being</span> Infinity</h1>
        <span class="ge">
         <p>One million phrases. Four Algorithms. Prefix based Auto Suggest.</p>
      
      <span class="lens">&#128269;</span>
      <label>
-        <input class="box" id="box" type="text" placeholder="Start typing to search phrases...">
+        <input class="box" type="text" placeholder="Start typing to search phrases...">
      </label>
      </span>
      <div id="sug">
         <!-- Suggestion box -->
+
      </div>
      </div>
      <script>
-        var searchbox=document.querySelector("#box");
-        var suggestionBox=document.querySelector("#sug");
-        searchbox.addEventListener("input",function(){
-           //get user typed text
-            var userInput=searchbox.value;
-            if(userInput.trim()===""){
+    var searchBox = document.querySelector(".box");
+    var suggestionBox = document.querySelector("#sug");
 
-            }
-            else
-            {
-                var url1= "https://autosuggest-backend.onrender.com/api/autosuggest?q="
-                var url2 = "&algorithm=brute&limit=10&weighted=false";
-                var url = url1 + userInput + url2;
-            }
-           // make api call to get suggestions
-           fetch(url)
-           .then(function(response){
-            return response .json();
-           })
-           .then(function(data){
-            console.log(data);
-            
-            var resultArray=data.results;
-            var res="";
-            for(var i=0;i<resultArray.length;i++){
-                res+="<div>"+resultArray[i].text+"</div>";
-            }
-            suggestionBox.innerHTML=res;
-           })
-         
+    searchBox.addEventListener("input", function () {
 
-           // display data in html
-          
-           
-        })
-     </script>
+        var userInput = searchBox.value;
+
+    
+        if (userInput.trim() === "") {
+            suggestionBox.innerHTML = "";
+            return;
+        }
+
+        var url1 = "https://autosuggest-backend.onrender.com/api/autosuggest?q=";
+        var url2 = "&algorithm=brute&limit=10&weighted=false";
+        var url = url1 + userInput + url2;
+
+        fetch(url)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                console.log(data);
+                var resultArray = data.results;
+
+                var res = "";
+
+                for (var i = 0; i < resultArray.length; i++) {
+                    res += "<div>" + resultArray[i].text + "</div>";
+                }
+
+                suggestionBox.innerHTML = res;
+            });
+    });
+</script>
      </body>
 </html>
